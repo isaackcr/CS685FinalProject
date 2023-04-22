@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 import torch
 
-def train_datasets(train_filename, test_filename, model_name="dmis-lab/biobert-base-cased-v1.2"):
+def fine_tune(train_filename, test_filename, model_name="dmis-lab/biobert-base-cased-v1.2"):
     print("Load train dataset from disk: ", train_filename)
     train_dataset = load_from_disk(train_filename)
     print("Load test dataset from disk: ", test_filename)
