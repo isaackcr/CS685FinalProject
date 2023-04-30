@@ -3,6 +3,7 @@ data/
 report/*
 !report/llmcancer.tex
 !report/refs.bib
+!report/llmcancer.pdf
 
 .DS_Store
 
