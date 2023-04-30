@@ -1,5 +1,10 @@
 data/
 .idea/
+report/*
+!report/llmcancer.tex
+!report/refs.bib
+
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
