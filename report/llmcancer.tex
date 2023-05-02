@@ -23,6 +23,13 @@
   \country{USA}
 }
 
+\author{Anchit Bhattacharya}
+\email{abh240@uky.edu}
+\affiliation{%
+  \institution{University of Kentucky}
+  \country{USA}
+}
+
 %%
 %% This command processes the author and affiliation and title
 %% information and builds the first part of the formatted document.
@@ -49,16 +56,37 @@ The final step in processing the data set was to create randomized, split, balan
 We selected four models from the HuggingFace open source model library for our experiments:
 \begin{itemize}
   \item stanford-crfm/BioMedLM: a GPT based language model trained only on biomedical abstracts and papers from The Pile
-  \item gpt2-xl: a pretrained language model based on GPT-2. The model is trained on the English language using causal language modeling.
-  \item dmis-lab/biobert-base-cased-v1.2: a BERT based pretrained language model trained on PubMed abstracts and PMC full-text articles
-  \item emilyalsentzer/Bio\_ClinicalBERT: initialized from BioBert and trained on all MIMIC-III notes
+  \item gpt2-xl: a pretrained language model based on GPT-2. The model is trained on the English language using causal language modeling.
+  \item dmis-lab/biobert-base-cased-v1.2: a BERT based pretrained language model trained on PubMed abstracts and PMC full-text articles
+  \item emilyalsentzer/Bio\_ClinicalBERT: initialized from BioBert and trained on all MIMIC-III notes
 \end{itemize}
 Two of the models tested were GPT and two were BERT-based, giving us a mix of encoder and decoder models from the transformer architecture. We chose these models because they were well cited in the literature and the largest models from HuggingFace that our computational platform could train and test within our time constraints. 
 
 
 \section{Results}
 
+We trained our four models on the 1000 document dataset described above, where we trained on 700 samples and tested on 300. We report the accuracy, precision, recall and F1 scores below on our test data after training the model for 10 epochs. 
+
+\begin{center}
+\begin{tabular}{||c c c c c c c ||} 
+ \hline
+ Model & Parameters & Style & Accuracy & Precision & Recall & F1 \\ [0.5ex] 
+ \hline\hline
+ stanford-crfm/BioMedLM & 2.7B & GPT & 0.833 & 0.816 & 0.888 & 0.850
+ \\ 
+ \hline
+ gpt2-xl & 1.5B & GPT & 0.847 & 0.875 & 0.831 & 0.853 \\
+ \hline
+ dmis-lab/biobert-base-cased-v1.2 & 340M & BERT & 0.863 & 0.922 & 0.813 & \textbf{0.864} \\
+ \hline
+ emilyalsentzer/BioClinicalBERT & 340M & BERT & 0.850 & 0.857 & 0.863 & 0.860 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+
 \section{Discussion}
+
+Based on our results, we observed that the two BERT-style models outperformed both of the GPT-style models. The BERT-based dmis-lab/biobert-base-cased-v1.2 model produced the best F1 score, followed by Bio\_ClinicalBERT. Surprisingly, the results produced by the GPT-style BioMedLM model was similar to the GPT2-XL model, even though BioMedLM was pretrained on biomedical text, whereas GPT2-XL was trained on general English text. For future work, we would like to run similar experiments with these models on our largest dataset size of 22601, which was not possible with our limited computational resources and considering the total training time of the models. We would also like to explore better hyperparameter tuning to see if our results can be further improved. In terms of newer methods, we would like to explore zero shot learning with prompt engineering on the GPT-style models and compare to the BERT-style models. 
 
 
 \bibliographystyle{ACM-Reference-Format}
